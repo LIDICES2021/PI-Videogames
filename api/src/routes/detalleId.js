@@ -7,7 +7,7 @@ const router = require("express").Router();
 const { Videogame, Genres } = require("../db");
 
 router.get("/", async (req, res) => {
-  const { idVideogame } = req.params;
+  const { id } = req.params;
 
   try {
 

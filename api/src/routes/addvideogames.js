@@ -9,7 +9,7 @@ const { Videogame, Genres } = require("../db");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, description, released, rating, image, id,platforms, genres } = req.body;
+    const { name, description, released, rating, platforms, genres } = req.body;
 
 
 
@@ -18,16 +18,10 @@ router.post("/", async (req, res) => {
       description: description,
       released: released,
       rating: rating,
-      image: image,
       platforms: platforms,
     });
 
-    genres.forEach(async (e) => {
-
-      let resultGenres = await Genres.findOne({ where: { name: e } });
-      
-      await addgames.addGenre(resultGenres);
-    });
+    await addgames.addGenres(genres)
 
     res.send('Creado el Videogames');
 
