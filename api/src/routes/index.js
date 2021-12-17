@@ -15,23 +15,21 @@ const detalleId = require('./detalleId');
 
 const genres = require('./genres');
 
-const addvideogames = require('./addvideogames');
+const addVideogames = require('./addvideogames');
 
 
 
 
 
-
+router.use('/video', videogamesQuery);
 
 router.use('/videogames', videogames);
 
-router.use('/videogames?name=', videogamesQuery);
-
-router.use('/videogame', detalleId);
+router.use('/videogame/:id', detalleId);
 
 router.use('/genres', genres);
 
-router.use('/videogame', addvideogames);
+router.use('/videogame', addVideogames);
 
 
 

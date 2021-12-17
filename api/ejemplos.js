@@ -22,41 +22,59 @@ var aventura = Videogame.create({
     plataformas: 'Android,PS4, Xbox, PC'
   });
 
-  db.forEach((e) => {
-    array.push({
-      id: e.id,
-      name: e.name,
-      image: e.background_image,
-      description: e.description,
-      released: e.released,
-      rating: e.rating,
-      platforms: e.platforms.map((platform) => platform.platform.name),
-      genres: e.genres.map((genre) => genre.name),
-      source: "db",
-    });
-  });
+
+  "name": "MineCraft",
+  "description": "desarrolar la mentalidad",
+  "image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+  "released": "2016-10-21",
+  "rating": 5.8,
+  "platforms": "PS5, PS4, Xbox, PC",
+  "genres": 14
+
+  "name": "Civilization",
+  "description": "Construir un imperio",
+  "image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+  "released": "2011-11-18",
+  "rating": 8,
+  "platforms": "PC, PS4",
+  "genres": 1
 
 
 
-  for (let i = 1; i <= 5; i++) {
-    let datosDeApi = await axios.get(api, {
-      responseType: "json",
-    });
-    api = datosDeApi.data.next;
-    datosDeApi.data.results.forEach((e) => {
-      array.push({
-        id: e.id,
-        name: e.name,
-        image: e.background_image,
-        description: e.description,
-        released: e.released,
-        rating: e.rating,
-        platforms: e.platforms.map((platform) => platform.platform.name),
-        genres: e.genres.map((genre) => genre.name),
-        source: "api",
-      });
-    });
-  }
+  "name": "Sonic",
+  "description": "luchar",
+  "image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+  "released": "2021-10-20",
+  "rating": 9.5,
+  "platforms": "Android,PS4, Xbox, PC",
+  "genres": 18
+
+
+
+  { "author": "author", "title": "title", "contents": "hello" },
+  { "author": "author", "title": "title", "contents": "hey there" },
+
+
+
+
+  "name": "Sonic",
+  "description": "LUCHAR",
+  "image": "`https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg`",
+  "released": "2021-10-20",
+  "rating": 9,
+  "platforms": "Android,PS4, Xbox, PC",
+  "genres": 15
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,3 +119,28 @@ var aventura = Videogame.create({
     console.log("Videogames y genres precargados");
   })
   .catch(err => console.log(err))
+
+
+
+
+
+  var vAventura =  Videogame.create({
+
+    name: 'MineCraft',
+    description: 'Markus Persson',
+    released: '2011-11-18',
+    rating: 8,
+    platforms: 'PC, PS4'
+  });
+ 
+ 
+  var gAventura =  Genres.create({
+    name: 'aventura'
+  });
+
+
+  Promise.all([vAventura, gAventura])
+          .then(res => {
+            console.log("Videogames y Genres precargados");
+          })
+          .catch(err => console.log(err))
