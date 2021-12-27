@@ -1,15 +1,22 @@
 require("dotenv").config();
 const axios = require("axios");
-const db = require("../db");
+
 const { YOUR_API_KEY } = process.env;
 const { Op } = require("sequelize");
 const { Videogame, Genres } = require("../db");
+
+
+
 
 const videogames = async (req, res, next) => {
 
   const { name } = req.query;
 
-  var llamadoQuery = [];
+ // const { page } = req.query;
+
+  var arrayVideogames = [];
+
+  //var nuevo = [];
 
   try {
 
@@ -20,7 +27,7 @@ const videogames = async (req, res, next) => {
         include: [Genres],
       });
         searchName.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi DB
-          llamadoQuery.push({
+          arrayVideogames.push({
             id: e.id,
             name: e.name,
             image: e.image,
@@ -28,12 +35,10 @@ const videogames = async (req, res, next) => {
             source: "db"
           });
         });
-
-
         const apiName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${YOUR_API_KEY}`);
 
         apiName.data.results.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi API
-          llamadoQuery.push({
+          arrayVideogames.push({
             id: e.id,
             name: e.name,
             image: e.background_image,
@@ -41,22 +46,15 @@ const videogames = async (req, res, next) => {
             source: "api"
           });
         });
-       var nuevo = [];
-        for(let i=0; i<15; i++) {//me traigo los 15 primero videogamescon query
-          nuevo.push(llamadoQuery[i]);
-        }
-      return res.json(nuevo);
     }
     else {
-
-      let llamadoVideogames = [];
 
       let db = await Videogame.findAll({// me traigo todo de mi base datos incluyendo genres
         include: [Genres],
       });
 
       db.forEach((e) => {//guardo en mi array los datos de mi base de datos que necesito.
-        llamadoVideogames.push({
+        arrayVideogames.push({
           id: e.id,
           name: e.name,
           image: e.image,
@@ -74,7 +72,7 @@ const videogames = async (req, res, next) => {
         apiGames = datosDeApi.data.next;
 
         datosDeApi.data.results.forEach((e) => {
-          llamadoVideogames.push({
+          arrayVideogames.push({
             id: e.id,
             name: e.name,
             image: e.background_image,
@@ -83,8 +81,17 @@ const videogames = async (req, res, next) => {
           });
         });
       }
-      res.status(200).json(llamadoVideogames);
     }
+    return res.status(200).json(arrayVideogames);
+  
+    // page = 1;
+    // console.log(page);
+    // //var page_size = 15;
+            // for(let i= (page-1) * page_size; i<page * page_size; i++) {
+
+        //   nuevo.push(arrayVideogames[i]);
+        // }
+    
   } catch (err) {
     res.status(404).json({ err });
   }

@@ -8,8 +8,6 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      // autoIncrement: true,
-      // unique: true
     },
     name: {
       type: DataTypes.STRING,
@@ -33,4 +31,5 @@ module.exports = (sequelize) => {
       allowNull: false,
     }
   });
+  
 };

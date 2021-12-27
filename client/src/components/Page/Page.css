@@ -1,0 +1,8 @@
+.page {
+    height: 100vh;
+    background: url("./H1jYDH-5f_720x0__1.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

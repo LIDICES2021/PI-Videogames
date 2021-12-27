@@ -1,13 +1,7 @@
-require("dotenv").config();
-const axios = require("axios");
+
 const db = require("../db");
-const { YOUR_API_KEY } = process.env;
-
-
 
 const { Videogame, Genres } = require("../db");
-
-
 
 const addVideogames = async (req, res, next) => {
 

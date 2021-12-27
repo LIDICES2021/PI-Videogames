@@ -9,7 +9,7 @@ const { Videogame, Genres } = require("../db");
 
 const videogames = require('./videogames');
 
-const videogamesQuery = require('./videogamesQuery');
+
 
 const detalleId = require('./detalleId');
 
@@ -17,11 +17,13 @@ const genres = require('./genres');
 
 const addVideogames = require('./addvideogames');
 
+const platforms = require('./platforms');
 
 
 
 
-router.use('/video', videogamesQuery);
+
+
 
 router.use('/videogames', videogames);
 
@@ -30,6 +32,10 @@ router.use('/videogame/:id', detalleId);
 router.use('/genres', genres);
 
 router.use('/videogame', addVideogames);
+
+router.use('/platforms', platforms);
+
+
 
 
 
