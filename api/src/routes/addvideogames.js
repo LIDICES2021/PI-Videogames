@@ -14,8 +14,10 @@ const addVideogames = async (req, res, next) => {
       image: image,
       released: released,
       rating: rating,
-      platforms: platforms,
+      platforms: platforms
     });
+
+    
 
     await addgames.addGenres(genres)
 

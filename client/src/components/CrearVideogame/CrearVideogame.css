@@ -1,0 +1,47 @@
+.formulario{
+    position: relative;
+    right: -430px;
+    
+    width: 280px;
+    clear: both;
+    margin: 5px;
+    
+}
+.formulario .titleForm{
+    color:white;
+    text-align:center;
+    
+}
+.inputForm{
+    width: 55%;
+    clear: both;
+    float: right;
+    background-size: black;
+    margin-top: 5px;
+}
+.formulario .labelForm{
+    color:white;
+    font-size: 1em;
+    
+
+}
+.aster{
+    color:red;
+    font-size:100;
+}
+.bordeado{
+    width: 200%;
+    color: white;
+    border-color: black;
+}
+.crear{
+
+    position: relative;
+    right: -90px;
+    bottom: -10px;
+}
+.volver{
+    margin: 20px;
+}
+
+

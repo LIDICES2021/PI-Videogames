@@ -1,17 +1,15 @@
-/* eslint-disable no-undef */
 
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {addVideogame, getGenres, getPlatforms} from "../../actions/index";
 
+import {Link} from 'react-router-dom';
+
 import './CrearVideogame.css';
 
 
-
-
-
-const CrearVideogame = (prop) => {
+const CrearVideogame = () => {
 
     const [state, setState] = useState({
         name: "",
@@ -20,9 +18,9 @@ const CrearVideogame = (prop) => {
         released: "",
         rating: "",
         platforms: "",
-        genres: ""
+        genres: []
     });
-
+ //para platforms y genres
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,30 +28,60 @@ const CrearVideogame = (prop) => {
         dispatch(getPlatforms())
     }, [dispatch])
 
-    let genres = useSelector(state => state.genres)
+    let allGenres = useSelector(state => state.todosGenres)
     let platforms = useSelector(state => state.gamePlatforms)
 
     
 
-    function handleChange(event) {
-        event.preventDefault();
-        setState({ ...state, [event.target.name]: event.target.value })
+    const handleChange = (e) => {
+        e.preventDefault();
+        setState({ ...state, [e.target.name]: e.target.value })
+
+    }
+    const handleSelectGenres = (e) => {
+        setState({ ...state, genres: [...state.genres, e.target.value]})
+  
+    }
+   
+
+    const handleSelectPlatforms = (e) => {
+        if(state.platforms !== ""){
+            setState({ ...state, platforms: state.platforms.split(', ').concat(e.target.value).join(', ')})
+        }
+        else {
+            setState({ ...state, platforms: e.target.value})
+        }
+
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const getGenreName = (genreId) => {
+       
+        let buscar = []
+        // eslint-disable-next-line eqeqeq
+        buscar = allGenres.find(g => g.id == genreId)
+       
+        return buscar.name;
+  
+    }
 
-        if(!state.name) {
-            return alert("Please enter a name")
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(!state.name)  {
+            return alert("Error, el nombre no puede estar vacío")
         }
         else if(!state.description) {
-            return alert("Please enter a description")
+            return alert("Error, la descripción no es válida")
+        }
+        else if (!state.released) {
+            return alert("Error, debe seleccionar la fecha de lanzamiento")
         }
         else if (!state.platforms) {
-            return alert("Please enter a platforms")
+            return alert("Error, debe seleccionar al menos una plataforma")
         }
-
-
+        else if (!state.genres) {
+            return alert("Error, debe seleccionar al menos un género")
+        }
         dispatch(addVideogame(state));
 
         alert("VideoGame creado");
@@ -66,89 +94,88 @@ const CrearVideogame = (prop) => {
             released: "",
             rating: "",
             platforms: "",
-            genres: "",
+            genres: []
     
         })
     }
-
-   
-    
-
-
     return (
-        <div>
-            <h2>Formulario Para Crear VideoGame</h2>
+        <div className="general">
+            <Link to='/home'><button className="volver">Volver</button></Link>
+        <div className='formulario'>
+            <h1 className='titleForm'>Crear Videojuego</h1>
             <form className="form" onSubmit={handleSubmit}>
-                <label className="nameL" htmlFor="name">Nombre del VideoGame</label><br/>
+                <label className="labelForm" htmlFor="name">Nombre:<span className="aster">*</span></label>
                 <input
                     type='text'
                     name="name"
-                    placeholder="nombre"
+                    placeholder="nombre: ejemplo sonic"
                     autoComplete="off"
                     value={state.name}
                     onChange={handleChange}
-                    className="nameI"
+                    className="inputForm"
                 />
                 <br /><br />
 
-                <label className="descriptionL" htmlFor="description">Description</label><br />
+                <label className="labelForm" htmlFor="description">Descripción:<span className="aster">*</span></label>
                 <input
-                    type='text'
+                    type='textarea'
                     name="description"
-                    placeholder="Descripcion"
+                    placeholder="describe el videojuego"
                     rows="8"
                     cols="50"
                     autoComplete="off"
                     value={state.description}
                     onChange={handleChange}
-                    className="descriptionI"
+                    className="inputForm"
                 />
                 <br /><br />
 
-                <label className="imageL" htmlFor="image">Imagen</label><br />
+                <label className="labelForm" htmlFor="image">Imagen:</label>
                 <input
                     type='text'
                     name="image"
-                    placeholder="imagen"
+                    placeholder="url de la imagen"
                     autoComplete="off"
                     value={state.image}
                     onChange={handleChange}
-                    className="imageI"
+                    className="inputForm"
                 />
                 <br /><br />
 
-                <label className="releasedL" htmlFor="released">Fecha de Lanzamiento</label><br />
+                <label className="labelForm" htmlFor="released">Lanzamiento:<span className="aster">*</span></label>
                 <input
                     type='date'
                     name="released"
-                    placeholder="Fecha de Lanzamiento"
                     autoComplete="off"
                     value={state.released}
                     onChange={handleChange}
-                    className="releasedI"
+                    className="inputForm"
                 />
                 <br /><br />
 
-                <label className="ratingL" htmlFor="rating">Rating</label><br />
+                <label className="labelForm" htmlFor="rating">Rating:<span className="aster">*</span></label>
                 <input
                     type='number'
                     name="rating"
-                    placeholder="rating"
+                    placeholder="rango válido de 0 a 5"
                     autoComplete="off"
                     value={state.rating}
                     onChange={handleChange}
-                    className="ratingI"
+                    className="inputForm"
+                    step="0.1"
+                    min="0"
+                    max="5"
                 />
                 <br /><br />
 
                <div className="platforms">
                 
-                <label className="label" >Plataformas:</label><br /><br />
-                <select name="platforms" onChange={handleChange} >
-
+                <label className="labelForm" >Plataformas:<span className="aster">*</span></label>
+                <select className="inputForm" name="platforms" onChange={handleSelectPlatforms} >
+                <option value="Android"></option>
                     {
-                        platforms && platforms.map((p) => (
-                            <option 
+                        platforms.map((p) => (
+                            <option key={p} 
                             value={p}
                             >
                             {p}
@@ -156,38 +183,34 @@ const CrearVideogame = (prop) => {
                         ))
                     }
                 </select>
+                <div className="bordeado"><br></br>
+                 <p>{state.platforms}</p>
                 </div> 
+                </div> 
+                <div className="genre">
+                    <label className="labelForm" >Géneros:<span className="aster">*</span></label>
+                    <select className="inputForm" name="genres" onChange={handleSelectGenres} >
+                        <option value="1"></option>
+                        {
+                            allGenres.map((g) => (
+                                <option key={g.id}  className="option" value={g.id}>{g.name}</option>
+                            ))
+                        }
+                    </select>
+                    <div className="bordeado"><br></br>
+                        {
 
-                <br /><br />
+                            state.genres.map(g => getGenreName(g)).join(', ')
+                            
 
-              <div className="genero">
-                <label className="label" >Genero:</label><br />
-                <select name="genres" onChange={handleChange} >
-
-                    {
-                     genres && genres.map((g) => (
-
-                           
-                            <option key={g.id} className="option"                         
-                            value={g.id}
-                             >
-                                {g.name}
-                            </option>
-
-                        ))
-                    }
-
-                </select>
+                        }
+                    </div>
+                    
                 </div>
-
-                
-                 <br /><br />
-                <>
-                <button className="crear" type="submit">CREAR</button>
-                </>
+                <br></br>
+                <button className="crear" type="submit">Crear</button>
                 </form>
-
-            
+        </div>
         </div>
     )
 }

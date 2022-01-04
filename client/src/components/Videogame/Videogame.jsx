@@ -20,27 +20,18 @@ function Videogame() {
         dispatch(detalleVideogame(params.id));
     }, [dispatch, params.id]);
 
+
     return (
-        <>
-            <div >
-                <h1>Detalle del VideoGames</h1>
-            </div>
-            <div key={params.id} className="text">
-                <div>
-                <h1> Name: {game.name}</h1>
-                <img src={game.image} alt={game.name} width="500px" height="auto" />
-                </div>
-                <div className="container">
-                <h4>Genres: {game.genres}</h4>
-                <h4>Description: {game.description}</h4>
-                <h4>Released: {game.released}</h4>
-                <h4>Platforms: {game.platforms}</h4>
-                <h4>Source: {game.source}</h4>
-                </div>
-                <Link to={`/home`}><button type="submit">Home</button></Link>   
-            </div>
-            
-        </>
+        <div className="detalle">
+            <Link to='/home'><button className="boton"><b>Volver</b></button></Link>
+                <h2 className="videojuego">Detalle del Videojuego</h2>
+                <h3 className="nombre"> Nombre: {game.name}</h3>
+                <div className="imagen"><img src={game.image} alt={game.name} width="500px" height="auto"/></div>
+                <h4 className="genero">Géneros: {game.genres}</h4>
+                <h4 className="descripcion">Descripción: <div dangerouslySetInnerHTML={{__html: game.description}}></div></h4>
+                <h4 className="lanzamiento">Fecha de Lanzamiento: {game.released}</h4>
+                <h4 className="plataforma">Plataformas: {game.platforms}</h4>
+        </div>
     );
 }
 

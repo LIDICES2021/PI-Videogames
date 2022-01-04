@@ -1,86 +1,79 @@
+.fondo{
+  margin-top: -7px;
+}
 .navbar {
-  height: 56px;
+  margin-top: 0em;
+  margin-left: 0px;
+  height: 54px;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #546bd4;
+  background-color: #0e144c;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: -22px;
   box-sizing: border-box;
 }
-
-.navbar nav {
-  height: 100%;
+ .navbar .reset {
+   background-color: #0a0f3c;
+  color: #e4e3e9;
+  font-size: 15px;
+  border-radius: 10px;
 }
 
-.list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  height: 100%;
-  color: white;
+
+.navbar .pageInicial{
+  background-color: #0a0f3c;
+  color: #e4e3e9;
+  font-size: 15px;
+  border-radius: 10px;
+
 }
 
-.list-item {
-  margin: 0;
-  display: flex;
-  height: 100%;
-  width: auto;
-  align-items: center;
+.navbar .crearGame{
+  background-color: #0a0f3c;
+  color: #e4e3e9;
+  font-size: 15px;
+  border-radius: 10px;
+
+}
+.navbar .selectorAlf{
+  background-color: #0a0f3c;
+  color: #e4e3e9;
+  font-size: 15px;
+}
+.navbar .selectorRat{
+  background-color: #0a0f3c;
+  color: #e4e3e9;
+
+
+}
+.navbar .filtroGenres{
+  background-color: #0a0f3c;
+  color: #e4e3e9;
+  font-size: 15px;
+
 }
 
-.list-item a {
-  color: white;
-  height: 100%;
-  padding: 16px 10px;
-  border-bottom: 4px solid transparent;
-}
-
-.list-item a:hover,
-.list-item a.active {
-  background-color: #808080;
-  color: white;
-}
-
-.card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-top: 4em;
-
-  gap: 1em;
-  justify-content: space-around;
-   
-  }
   .key {
-
-    width: 15%;
-    border: solid #999999 0.1em;
-    border-radius: 0.5em;
+    width: 20%;
+    border: solid #999999 0em;
+    border-radius: 1em;
   }
   .img {
     width: 100%;
     object-fit: cover;
-    height: 40%;
+    height: 45%;
+  }
+  .buscarDetalle{
+    text-align: center;
+  
+  }
+  .noEncontrado{
+    color:#e4e3e9;
+    text-align: center;
   }
   
-  .name {
-    text-align: center;
 
-   
-  }
- 
-  .genres {
-    text-align: center;
-    
-  }
-  
- 
-  
  

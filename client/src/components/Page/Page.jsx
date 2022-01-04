@@ -7,21 +7,16 @@
  
  function Page() {
 
-    return (
-        <div className='page'>
-            <div className='title'>
-               <h2>App VideoGames</h2>
-                <Link to='/home'>
-                    <button className='title' type='submit'>
-                        Home
-                    </button>
-                </Link>
-            </div>
-        </div>
-    )
-
-    
-    }
+     return (
+         <div className='page'>
+             <div className='container'>
+             <h1 className='title'><b>Mi aplicacion de<br></br>
+                  videojuegos</b></h1><div className='img'></div>
+             </div>
+             <div><Link to='/home'><button className='entrar' type='submit'><b>Entrar</b></button></Link></div>
+         </div>
+     )
+ }
      
  
  

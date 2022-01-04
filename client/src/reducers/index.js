@@ -1,61 +1,115 @@
 /* eslint-disable default-case */
-import {
-    OBTENER_VIDEOGAMES,
-    BUSCAR_VIDEOGAMES,
-    OBTENER_GENRES,
-    ORDEN_ALFABETICO,
-    ORDEN_RATING,
-    DETALLE_VIDEOGAME,
-    GET_PLATFORMS
-} from "../actions/index.js";
 
 
 const initialState = {
-    getVideogames: [],
-    gameSearch: [],
-    genres: [],
-    ordenAlfabetico: "",
-    ordenRating: "",
+
+    todosVideogames: [],
+
+    videogames: [],//
+
+    todosGenres: [],
+
     detalleGame: {},
-    gamePlatforms: [],
-    estaFiltrado: false
+
+    gamePlatforms: []
+
 };
 
 function rootReducer(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case OBTENER_VIDEOGAMES:
-            return {...state, getVideogames: payload, estaFiltrado: false}
 
-        case BUSCAR_VIDEOGAMES:
-            return {...state, gameSearch: payload, estaFiltrado: true}
-
-        case DETALLE_VIDEOGAME:
-            return {...state, detalleGame: payload}
-
-        case OBTENER_GENRES:
-            
-            return {...state, genres: payload}
-
-        case GET_PLATFORMS:
-        
-            return {...state, gamePlatforms: payload}
-
-        case ORDEN_ALFABETICO:
-            return {...state, 
-                ordenAlfabetico: payload,
-                ordenRating: ""
-            }
-        case ORDEN_RATING:
+        case "OBTENER_VIDEOGAMES":
             return {
                 ...state,
-                ordenRating: payload,
-                ordenAlfabetico: ""
+                videogames: payload,
+                todosVideogames: payload,
+
             }
         
+        case "BUSCAR_VIDEOGAMES":
+            return { ...state, videogames: payload };
+
+        case "FILTER_GENRES":
+            const games = state.todosVideogames
+            const genresFiltered = payload === 'All' ? games : games.filter(e => e.genres.includes(payload));
+            return {
+                ...state,
+                videogames: genresFiltered,
+            }
+
+        case "ORDEN_ALFABETICO":
+
+            let ordenarAlf = payload === 'asc' ? state.videogames.sort((a, b) => {
+
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                return 0;
+            }) : state.videogames.sort((a, b) => {
+
+                if (a.name < b.name) {
+                    return 1;
+                }
+                if (a.name > b.name) {
+                    return -1;
+                }
+                return 0;
+            })
+
+            return {
+                ...state,
+                videogames: ordenarAlf
+            };
+
+
+        case "ORDEN_RATING":
+            let ordenarRating = payload === 'asc' ? state.videogames.sort((a, b) => {
+
+                if (a.rating > b.rating) {
+                    return 1;
+                }
+                if (a.rating < b.rating) {
+                    return -1;
+                }
+                return 0;
+            }) : state.videogames.sort((a, b) => {
+
+
+                if (a.rating < b.rating) {
+                    return 1;
+                }
+                if (a.rating > b.rating) {
+                    return -1;
+                }
+                return 0;
+            })
+            return {
+                ...state,
+                videogames: ordenarRating
+            };
+
+
+        case "DETALLE_VIDEOGAME":
+            return { ...state, detalleGame: payload }
+
+        case "OBTENER_GENRES":
+
+            return { ...state, todosGenres: payload }
+
+        case "GET_PLATFORMS":
+
+            return { ...state, gamePlatforms: payload }
+
+        case "CREAR_VIDEOGAME":
+            return { ...state }
+
         default:
-            return {...state}
+            return { ...state }
     }
 
 }

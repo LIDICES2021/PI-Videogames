@@ -1,51 +1,61 @@
 require("dotenv").config();
 const axios = require("axios");
-
 const { YOUR_API_KEY } = process.env;
 const { Op } = require("sequelize");
 const { Videogame, Genres } = require("../db");
 
 
 
+//var file = require('../../../videogames.json');
 
-const videogames = async (req, res, next) => {
+
+const videogames = async (req, res) => {
 
   const { name } = req.query;
 
- // const { page } = req.query;
-
   var arrayVideogames = [];
-
-  //var nuevo = [];
 
   try {
 
     if (name) {
 
-      const searchName = await Videogame.findAll({
+      let searchName = await Videogame.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },// operador ilike resuelve Mayuscula y % contenga el name
-        include: [Genres],
+        include: {
+          model: Genres,
+          attribute: ['name'],
+          through: {
+              attribute:[],
+          },
+      }
       });
-        searchName.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi DB
-          arrayVideogames.push({
-            id: e.id,
-            name: e.name,
-            image: e.image,
-            genres: e.genres.map((genres) => genres.name),
-            source: "db"
-          });
+      searchName.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi DB
+        arrayVideogames.push({
+          id: e.id,
+          name: e.name,
+          image: e.image,
+          rating: e.rating,
+          genres: e.genres.map((genres) => genres.name)
         });
-        const apiName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${YOUR_API_KEY}`);
+      });
 
-        apiName.data.results.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi API
-          arrayVideogames.push({
-            id: e.id,
-            name: e.name,
-            image: e.background_image,
-            genres: e.genres.map((genres) => genres.name),
-            source: "api"
-          });
+     const apiName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${YOUR_API_KEY}`);
+
+
+      
+     let gameL = apiName.data.results;
+        //let gameL = file.results.filter(e => e.name.toLowerCase().includes(name.toLowerCase()) );// sin api
+
+
+      gameL.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi API
+        arrayVideogames.push({
+          id: e.id,
+          name: e.name,
+          image: e.background_image,
+          rating: e.rating,
+          genres: e.genres.map((genres) => genres.name)
         });
+      });
     }
     else {
 
@@ -58,40 +68,39 @@ const videogames = async (req, res, next) => {
           id: e.id,
           name: e.name,
           image: e.image,
-          genres: e.genres.map((genres) => genres.name),
-          source: "db",
+          rating: e.rating,
+          genres: e.genres.map((genres) => genres.name)
+
         });
       });
+      
 
-      let apiGames = `https://api.rawg.io/api/games?key=${YOUR_API_KEY}`;// mi api
+    let apiGames = `https://api.rawg.io/api/games?key=${YOUR_API_KEY}`;// mi api
 
-      for (let i = 1; i <= 5; i++) {//me traigo 100 videogames de mi api y lo guardo en mi array con los datos que necesito
+     for (let i = 1; i <= 5; i++) {//me traigo 100 videogames de mi api y lo guardo en mi array con los datos que necesito
 
 
-        let datosDeApi = await axios.get(apiGames);
-        apiGames = datosDeApi.data.next;
+       let datosDeApi = await axios.get(apiGames);
+       apiGames = datosDeApi.data.next;
 
-        datosDeApi.data.results.forEach((e) => {
-          arrayVideogames.push({
-            id: e.id,
-            name: e.name,
-            image: e.background_image,
-            genres: e.genres.map((genres) => genres.name),
-            source: "api",
-          });
+      let source = datosDeApi.data.results
+
+      //let source = file.results;//sin api
+
+      source.forEach((e) => {
+        arrayVideogames.push({
+          id: e.id,
+          name: e.name,
+          rating: e.rating,
+          image: e.background_image,
+          genres: e.genres.map((genres) => genres.name)
         });
+      });
       }
     }
+
     return res.status(200).json(arrayVideogames);
   
-    // page = 1;
-    // console.log(page);
-    // //var page_size = 15;
-            // for(let i= (page-1) * page_size; i<page * page_size; i++) {
-
-        //   nuevo.push(arrayVideogames[i]);
-        // }
-    
   } catch (err) {
     res.status(404).json({ err });
   }

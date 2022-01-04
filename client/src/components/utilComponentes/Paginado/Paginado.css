@@ -1,0 +1,29 @@
+.paginado {
+    position: relative;
+    bottom: 0em;
+    right: -21em;
+    background: #03072e;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    grid-gap: 8px;
+    gap: 8px;
+    padding: 3px;
+    border-radius: 90px
+}
+
+.paginado button{
+    background: none;
+    border: none;
+    color: rgb(241, 235, 235);
+    font-size: 20px;
+}
+
+.item button:hover {
+    cursor: pointer;
+    font-size: 130%;
+    text-shadow: 0 0 5px #fff,
+}
+#selected{
+    border-style: solid;
+}

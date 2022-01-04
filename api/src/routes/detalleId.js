@@ -18,12 +18,11 @@ const detalleId = async (req, res, next) => {
         id: data.id,
         name: data.name,
         image: data.background_image,
-        genres: data.genres.map((genres) => genres.name),
+        genres: data.genres.map((genres) => genres.name).join(', '),
         description: data.description,
         released: data.released,
         rating: data.rating,
-        platforms: data.platforms.map((p) => p.platform.name),
-        source: "api"
+        platforms: data.platforms.map((p) => p.platform.name).join(', ')
       }
 
     } else {
