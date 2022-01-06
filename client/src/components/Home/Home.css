@@ -12,11 +12,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: -22px;
+  padding: -20px;
   box-sizing: border-box;
 }
  .navbar .reset {
-   background-color: #0a0f3c;
+  background-color: #0a0f3c;
   color: #e4e3e9;
   font-size: 15px;
   border-radius: 10px;
@@ -46,6 +46,7 @@
 .navbar .selectorRat{
   background-color: #0a0f3c;
   color: #e4e3e9;
+  font-size: 15px;
 
 
 }
@@ -68,6 +69,11 @@
   }
   .buscarDetalle{
     text-align: center;
+    position: relative;
+    right: -2px;
+    bottom: 53px;
+    color:antiquewhite;
+    font-size: 15px;
   
   }
   .noEncontrado{

@@ -32,7 +32,7 @@ const videogames = async (req, res) => {
       searchName.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi DB
         arrayVideogames.push({
           id: e.id,
-          name: e.name,
+          name: e.name.toUpperCase(),
           image: e.image,
           rating: e.rating,
           genres: e.genres.map((genres) => genres.name)
@@ -41,8 +41,6 @@ const videogames = async (req, res) => {
 
      const apiName = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${YOUR_API_KEY}`);
 
-
-      
      let gameL = apiName.data.results;
         //let gameL = file.results.filter(e => e.name.toLowerCase().includes(name.toLowerCase()) );// sin api
 
@@ -50,23 +48,30 @@ const videogames = async (req, res) => {
       gameL.forEach((e) => {//hacemos un forEach  para mostrar los Datos de mi API
         arrayVideogames.push({
           id: e.id,
-          name: e.name,
+          name: e.name.toUpperCase(),
           image: e.background_image,
           rating: e.rating,
           genres: e.genres.map((genres) => genres.name)
         });
       });
+       
     }
     else {
 
       let db = await Videogame.findAll({// me traigo todo de mi base datos incluyendo genres
-        include: [Genres],
+        include: {
+          model: Genres,
+          attribute: ['name'],
+          through: {
+              attribute:[],
+          },
+      }
       });
 
       db.forEach((e) => {//guardo en mi array los datos de mi base de datos que necesito.
         arrayVideogames.push({
           id: e.id,
-          name: e.name,
+          name: e.name.toUpperCase(),
           image: e.image,
           rating: e.rating,
           genres: e.genres.map((genres) => genres.name)
@@ -90,7 +95,7 @@ const videogames = async (req, res) => {
       source.forEach((e) => {
         arrayVideogames.push({
           id: e.id,
-          name: e.name,
+          name: e.name.toUpperCase(),
           rating: e.rating,
           image: e.background_image,
           genres: e.genres.map((genres) => genres.name)

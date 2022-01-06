@@ -4,13 +4,11 @@ import axios from "axios";
 export const obtenerVideogames = () => {
     return async (dispatch) => {
         try {
-
             let response = await axios.get('http://localhost:3001/videogames')
             dispatch({
                 type: "OBTENER_VIDEOGAMES",
                 payload: response.data
             });
-
         } catch (error) {
             console.log(error)
         }
@@ -24,12 +22,11 @@ export const buscarVideogames = (name) => {
         try {
 
             let response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+             
             dispatch({
                 type: "BUSCAR_VIDEOGAMES",
                 payload: response.data
             });
-
-
         } catch (error) {
             console.log(error)
         }
@@ -109,4 +106,3 @@ export const filterGenres = (payload) => {
 
     }
 }
-

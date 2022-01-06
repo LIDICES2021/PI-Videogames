@@ -1,27 +1,188 @@
-.formulario{
-    position: relative;
-    right: -430px;
-    
-    width: 280px;
-    clear: both;
-    margin: 5px;
-    
-}
 .formulario .titleForm{
     color:white;
     text-align:center;
     
 }
+
+.form{
+	
+    width: 223px;
+    padding: 118px;
+    border-radius: 36px;
+    margin: auto;
+    background-color: rgb(2, 18, 71);
+}
+
+.labelForm{
+    width: 312px;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    right: 89px;
+    bottom: 39px;
+    margin: 0px;
+    padding: 8px;
+    color: white;
+}
+
+
+.inputForm {
+    width: 202px;
+    padding: 3px -10px;
+    border: 1px solid #f6f6f6;
+    border-radius: 5px;
+    background-color: #c1b6b6;
+    margin: 9px 0;
+    display: inline-block;
+    position: relative;
+    right: -68px;
+    bottom: 63px;
+    width: 80%;
+    clear: both;
+    margin-top: 2px;
+}
+
+.crear{
+    position: relative;
+    right: -184px;
+    bottom: -33px;
+    background-color: #0a0f3c;
+    color: #e4e3e9;
+    font-size: 23px;
+    border-radius: 7px;
+}
+.volver{
+    position: relative;
+    right: 145px;
+    bottom: -31px;
+    background-color: #0a0f3c;
+    color: #e4e3e9;
+    font-size: 20px;
+    border-radius: 7px;
+}
+.error1{
+    position: relative;
+    right: -74px;
+    bottom: 76px;
+    color: #e4e3e9;
+}
+.error2{
+    position: relative;
+    right: -73px;
+    bottom: 80px;
+    color: #e4e3e9;
+}
+
+.error3{
+    position: relative;
+    right: -74px;
+    bottom: 82px;
+    color: #e4e3e9;
+}
+.error4{
+    position: relative;
+    right: -72px;
+    bottom: 80px;
+    color: #e4e3e9;
+}
+.aster{
+    color:red;
+    font-size:100;
+}
+.agregar{
+    width: 200%;
+    position: relative;
+    right: 64px;
+    bottom: 66px;
+    display: inline-block;
+    color: white;
+    border-color: black;
+    flex-wrap: wrap;
+}
+.bordeado{
+    
+    width: 200%;
+    position: relative;
+    right: 64px;
+    bottom: 66px;
+    display: inline-block;
+    color: white;
+    border-color: black;
+}
+.eliminar{
+    position: relative;
+    right: 90px;
+    bottom: 98px;
+    background-color: #0a0f3c;
+    color: #e4e3e9;
+}
+  
+.eliminar1{
+    position: relative;
+    right: 90px;
+    bottom: 98px;
+    background-color: #0a0f3c;
+    color: #e4e3e9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .formulario{
+    position: relative;
+    right: -345px;
+    width: 334px;
+    clear: both;
+    margin: 6px;
+    border-color: #0a0f3c;
+    margin-top: 100px;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
+}
+
 .inputForm{
+    
     width: 55%;
     clear: both;
     float: right;
-    background-size: black;
     margin-top: 5px;
+    
 }
 .formulario .labelForm{
     color:white;
     font-size: 1em;
+    
     
 
 }
@@ -34,14 +195,10 @@
     color: white;
     border-color: black;
 }
-.crear{
 
-    position: relative;
-    right: -90px;
-    bottom: -10px;
-}
-.volver{
-    margin: 20px;
+
+.eliminar{
+
 }
 
-
+ */

@@ -11,7 +11,9 @@ const initialState = {
 
     detalleGame: {},
 
-    gamePlatforms: []
+    gamePlatforms: [],
+
+    mensajeError: {},
 
 };
 
@@ -23,13 +25,21 @@ function rootReducer(state = initialState, action) {
         case "OBTENER_VIDEOGAMES":
             return {
                 ...state,
-                videogames: payload,
+                videogames: payload, mensajeError: {mensaje:''},
                 todosVideogames: payload,
-
             }
         
         case "BUSCAR_VIDEOGAMES":
-            return { ...state, videogames: payload };
+
+            if (Array.isArray(payload)) {
+                debugger;
+
+                return { ...state, videogames: payload, mensajeError: {mensaje:''} };
+
+            } else {
+                
+                return { ...state, videogames: [], mensajeError: payload };
+            }
 
         case "FILTER_GENRES":
             const games = state.todosVideogames
@@ -95,6 +105,7 @@ function rootReducer(state = initialState, action) {
 
 
         case "DETALLE_VIDEOGAME":
+            
             return { ...state, detalleGame: payload }
 
         case "OBTENER_GENRES":
@@ -106,11 +117,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, gamePlatforms: payload }
 
         case "CREAR_VIDEOGAME":
-            return { ...state }
 
+            return { ...state, videogames: payload}
         default:
-            return { ...state }
+            return { ...state}
     }
-
 }
 export default rootReducer;

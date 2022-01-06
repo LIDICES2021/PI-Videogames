@@ -19,7 +19,6 @@ const platforms = async (req, res, next) => {
 
   let datosDeApi = await axios.get(apiGames);
   apiGames = datosDeApi.data.next;
-
   let data =  datosDeApi.data.results
 
   data.forEach( e => e.platforms.forEach( platform => { filtrado.push(platform) }))

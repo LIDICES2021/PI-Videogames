@@ -10,16 +10,16 @@
 
 .page .title {
   text-align: center;
-  font-size: 35px;
-  color: #ffffff;
-  margin-top: 100px;
-  font-weight: 100;
+    font-size: 35px;
+    color: #ffffff;
+    margin-top: 100px;
+    font-weight: 100;
 }
 .page .img {
   background-image: url('../../img/descarga5.jpg');
   background-size: 100% 100%;
-  width: 730px;
-  height: 430px;
+  width: 721px;
+  height: 394px;
   border-radius: 8px;
   box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
   overflow: hidden;
@@ -36,10 +36,9 @@
   border: none;
   border-radius: 0.83em;
   position: relative; 
-  bottom: -117px;
+  bottom: -162px;
   right: -171px;
 }
-
 .entrar:active {
   margin-top: 25px;
 }

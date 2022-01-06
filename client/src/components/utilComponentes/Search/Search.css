@@ -1,5 +1,10 @@
-.search{
-  background-color: #0a0f3c;
-  color: #e4e3e9;
-  font-size: 15px;
-} 
+.inputSearch {
+    background-color: white;
+   
+}
+.botonSearch{
+    background-color: #0a0f3c;
+    color: #e4e3e9;
+    font-size: 15px;
+    border-radius: 10px;
+}

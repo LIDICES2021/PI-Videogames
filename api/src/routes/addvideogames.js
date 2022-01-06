@@ -17,10 +17,12 @@ const addVideogames = async (req, res, next) => {
       platforms: platforms
     });
 
+
+    let addGenr = await Genres.findAll({ 
+      where: {name: genres}
+    })
+    await addgames.addGenres(addGenr);
     
-
-    await addgames.addGenres(genres)
-
     res.send('Creado el Videogames');
 
   } catch (err) {
